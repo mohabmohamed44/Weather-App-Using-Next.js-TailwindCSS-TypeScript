@@ -105,7 +105,7 @@ export default function Home() {
       data?.list.map(
         (entry) => new Date(entry.dt * 1000).toISOString().split("T")[0]
       )
-    )
+    ),
   ];
 
   // Filtering data to get the first entry after 6 AM for each unique date
