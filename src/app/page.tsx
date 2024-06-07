@@ -10,7 +10,7 @@ import { convertKelvinToCelsius } from "@/utils/convertKelvinToCelsius";
 import { convertWindSpeed } from "@/utils/convertWindSpeed";
 import { getDayOrNightIcon } from "@/utils/getDayOrNightIcon";
 import { metersToKilometers } from "@/utils/metersToKilometers";
-import axios from "axios";
+import axios from 'axios';
 import { format, fromUnixTime, parseISO } from "date-fns";
 import Image from "next/image";
 import { useQuery } from "react-query";
