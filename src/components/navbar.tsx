@@ -23,30 +23,6 @@ export default function Navbar({ location }: Props) {
   const [place, setPlace] = useAtom(placeAtom);
   const [_, setLoadingCity] = useAtom(loadingCityAtom);
 
-  // async function handleInputChang(value: string) {
-  //   setCity(value);
-  //   if (value.length >= 3) {
-  //     try {
-  //       const response = await axios.get(
-  //         `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${API_KEY}`
-  //       );
-
-  //       const suggestions = response.data.list.map((item: any) => item.name);
-  //       setSuggestions(suggestions);
-  //       setError("");
-  //       setShowSuggestions(true);
-  //     } catch (error) {
-  //       setSuggestions([]);
-  //       setShowSuggestions(false);
-  //     }
-  //   } else {
-  //     setSuggestions([]);
-  //     setShowSuggestions(false);
-  //   }
-  // }
-
-
-
   async function handleInputChange(value: string) {
     setCity(value);
     if (value.length >= 3) {
