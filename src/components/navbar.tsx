@@ -23,7 +23,31 @@ export default function Navbar({ location }: Props) {
   const [place, setPlace] = useAtom(placeAtom);
   const [_, setLoadingCity] = useAtom(loadingCityAtom);
 
-  async function handleInputChang(value: string) {
+  // async function handleInputChang(value: string) {
+  //   setCity(value);
+  //   if (value.length >= 3) {
+  //     try {
+  //       const response = await axios.get(
+  //         `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${API_KEY}`
+  //       );
+
+  //       const suggestions = response.data.list.map((item: any) => item.name);
+  //       setSuggestions(suggestions);
+  //       setError("");
+  //       setShowSuggestions(true);
+  //     } catch (error) {
+  //       setSuggestions([]);
+  //       setShowSuggestions(false);
+  //     }
+  //   } else {
+  //     setSuggestions([]);
+  //     setShowSuggestions(false);
+  //   }
+  // }
+
+
+
+  async function handleInputChange(value: string) {
     setCity(value);
     if (value.length >= 3) {
       try {
@@ -36,7 +60,9 @@ export default function Navbar({ location }: Props) {
         setError("");
         setShowSuggestions(true);
       } catch (error) {
+        console.error("Error fetching suggestions:", error);
         setSuggestions([]);
+        setError("Failed to fetch suggestions. Please try again.");
         setShowSuggestions(false);
       }
     } else {
@@ -44,6 +70,7 @@ export default function Navbar({ location }: Props) {
       setShowSuggestions(false);
     }
   }
+
 
   function handleSuggestionClick(value: string) {
     setCity(value);
@@ -108,7 +135,7 @@ export default function Navbar({ location }: Props) {
               <SearchBox
                 value={city}
                 onSubmit={handleSubmiSearch}
-                onChange={(e) => handleInputChang(e.target.value)}
+                onChange={(e) => handleInputChange(e.target.value)}
               />
               <SuggetionBox
                 {...{
@@ -129,7 +156,7 @@ export default function Navbar({ location }: Props) {
           <SearchBox
             value={city}
             onSubmit={handleSubmiSearch}
-            onChange={(e) => handleInputChang(e.target.value)}
+            onChange={(e) => handleInputChange(e.target.value)}
           />
           <SuggetionBox
             {...{
