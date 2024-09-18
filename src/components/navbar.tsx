@@ -27,8 +27,12 @@ export default function Navbar({ location }: Props) {
     setCity(value);
     if (value.length >= 3) {
       try {
+        const apiKey = process.env.NEXT_PUBLIC_WEATHER_KEY;
+        if (!apiKey) {
+          throw new Error("API key is not set");
+        }
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`
+          `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${apiKey}`
         );
 
         const suggestions = response.data.list.map((item: any) => item.name);

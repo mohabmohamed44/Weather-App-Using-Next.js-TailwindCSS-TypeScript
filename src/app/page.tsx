@@ -85,8 +85,12 @@ export default function Home() {
     "repoData",
     async () => {
       try {
+        const apiKey = process.env.NEXT_PUBLIC_WEATHER_KEY;
+        if (!apiKey) {
+          throw new Error("API key is not set");
+        }
         const { data } = await axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`
+          `https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${apiKey}`
         );
         setError(null);
         return data;
