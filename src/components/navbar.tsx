@@ -28,7 +28,7 @@ export default function Navbar({ location }: Props) {
     if (value.length >= 3) {
       try {
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${API_KEY}`
+          `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`
         );
 
         const suggestions = response.data.list.map((item: any) => item.name);
@@ -37,8 +37,12 @@ export default function Navbar({ location }: Props) {
         setShowSuggestions(true);
       } catch (error) {
         console.error("Error fetching suggestions:", error);
+        if (axios.isAxiosError(error)) {
+          setError(`API Error: ${error.response?.status} - ${error.response?.data.message || error.message}`);
+        } else {
+          setError("An unexpected error occurred");
+        }
         setSuggestions([]);
-        setError("Failed to fetch suggestions. Please try again.");
         setShowSuggestions(false);
       }
     } else {

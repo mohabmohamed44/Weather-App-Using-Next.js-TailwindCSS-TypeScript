@@ -16,7 +16,7 @@ import Image from "next/image";
 import { useQuery } from "react-query";
 import { loadingCityAtom, placeAtom } from "./atom";
 import { useAtom } from "jotai";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import { format as dateFromate } from "date-format";
 
 // var format = require('date-format');
@@ -79,14 +79,27 @@ interface WeatherData {
 export default function Home() {
   const [place, setPlace] = useAtom(placeAtom);
   const [loadingCity] = useAtom(loadingCityAtom);
+  const [error, setError] = useState<string | null>(null);
 
-  const { isLoading, error, data, refetch } = useQuery<WeatherData>(
-  "repoData",
-  async () => {
-    const { data } = await axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`
-    );
-    return data;
+  const { isLoading, error: queryError, data, refetch } = useQuery<WeatherData>(
+    "repoData",
+    async () => {
+      try {
+        const { data } = await axios.get(
+          `https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`
+        );
+        setError(null);
+        return data;
+      } catch (err) {
+        if (axios.isAxiosError(err)) {
+          console.error("API Error:", err.response?.data);
+          setError(`API Error: ${err.response?.status} - ${err.response?.data.message || err.message}`);
+        } else {
+          console.error("Unexpected error:", err);
+          setError("An unexpected error occurred");
+        }
+        throw err;
+      }
     }
   );
   
@@ -123,11 +136,10 @@ export default function Home() {
         <p className="animate-bounce">Loading...</p>
       </div>
     );
-  if (error)
+  if (error || queryError)
     return (
       <div className="flex items-center min-h-screen justify-center">
-        {/* @ts-ignore */}
-        <p className="text-red-400">{error.message}</p>
+        <p className="text-red-500">{error || (queryError as Error).message}</p>
       </div>
     );
   return (
