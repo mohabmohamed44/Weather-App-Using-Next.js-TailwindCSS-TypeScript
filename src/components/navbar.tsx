@@ -32,7 +32,7 @@ export default function Navbar({ location }: Props) {
           throw new Error("API key is not set");
         }
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${apiKey}`
+          `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${apiKey}&units=metric`
         );
 
         const suggestions = response.data.list.map((item: any) => item.name);
@@ -187,8 +187,4 @@ function SuggetionBox({
       )}
     </>
   );
-}
-
-function kelvinToCelsius(kelvin: number): number {
-  return Math.round(kelvin - 273.15);
 }

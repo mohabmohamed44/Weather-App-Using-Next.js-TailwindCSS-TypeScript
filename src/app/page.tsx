@@ -14,7 +14,7 @@ import axios from 'axios';
 import { format, fromUnixTime, parseISO } from "date-fns";
 import Image from "next/image";
 import { useQuery } from "react-query";
-import { loadingCityAtom, cityAtom } from "./atom";
+import { loadingCityAtom, placeAtom } from "./atom";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 // import { format as dateFromate } from "date-format";
@@ -77,7 +77,7 @@ interface WeatherData {
 }
 
 export default function Home() {
-  const [city, setCity] = useAtom(cityAtom);
+  const [place, setPlace] = useAtom(placeAtom);
   const [loadingCity] = useAtom(loadingCityAtom);
   const [error, setError] = useState<string | null>(null);
 
@@ -85,12 +85,13 @@ export default function Home() {
     "repoData",
     async () => {
       try {
-        const apiKey = process.env.NEXT_PUBLIC_WEATHER_KEY;
-        if (!apiKey) {
-          throw new Error("API key is not set");
+        if (!process.env.NEXT_PUBLIC_WEATHER_KEY) {
+          console.error("Weather API key is not set");
+          // Handle the error appropriately
+          return;
         }
         const { data } = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+          `https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`
         );
         setError(null);
         return data;
@@ -109,7 +110,7 @@ export default function Home() {
   
   useEffect(() => {
     refetch();
-  }, [city, refetch]);
+  }, [place, refetch]);
 
   const firstData = data?.list[0];
 
