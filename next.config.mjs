@@ -15,7 +15,7 @@ const nextConfig = {
         hostname: "weatherapi.com",
       },
       {
-        protocol: "http",
+        protocol: "https",
         hostname: "weatherapi.com",
       },
       {
@@ -23,11 +23,11 @@ const nextConfig = {
         hostname: "cdn.weatherapi.com",
       },
       {
-        protocol: "http",
+        protocol: "https",
         hostname: "cdn.weatherapi.com",
       },
       {
-        protocol: "http",
+        protocol: "https",
         hostname: "api.weatherapi.com",
       },
     ],

@@ -33,7 +33,7 @@ export default function APIKeyTester() {
 
       // Make a simple request to test the API key
       const response = await axios.get(
-        `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=London&aqi=no`,
+        `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=London&aqi=no`,
       );
 
       setResult({
