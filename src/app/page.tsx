@@ -18,6 +18,7 @@ import { loadingCityAtom, placeAtom } from "./atom";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import DebugInfo from "@/components/DebugInfo";
+import ProductionChecker from "@/components/ProductionChecker";
 // import { format as dateFromate } from "date-format";
 
 // var format = require('date-format');
@@ -141,7 +142,7 @@ export default function Home() {
 
       try {
         const { data } = await axios.get(
-          `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${place}&days=3&aqi=no&alerts=no`,
+          `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${place}&days=7&aqi=no&alerts=no`,
         );
         console.log(
           `Fetched ${data?.forecast?.forecastday?.length || 0} days of forecast data`,
@@ -232,6 +233,7 @@ export default function Home() {
   }
   return (
     <div className="flex flex-col gap-4 bg-gray-100 min-h-screen ">
+      <ProductionChecker />
       <DebugInfo />
       <Navbar location={data?.location.name} />
       <main className="px-3 max-w-7xl mx-auto flex flex-col gap-9  w-full  pb-10 pt-4 ">
