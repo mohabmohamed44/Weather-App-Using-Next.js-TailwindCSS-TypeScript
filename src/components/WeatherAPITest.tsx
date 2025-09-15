@@ -51,7 +51,7 @@ export default function WeatherAPITest() {
     try {
       // Make sure we get all 7 days of forecast data
       const response = await axios.get(
-        `http://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${location}&days=7&aqi=no&alerts=no`,
+        `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${location}&days=7&aqi=no&alerts=no`,
       );
       setWeather(response.data);
       console.log("WeatherAPI data:", response.data);

@@ -47,7 +47,7 @@ export default function DebugInfo() {
 
     try {
       const response = await fetch(
-        `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=London&aqi=no`,
+        `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=London&aqi=no`,
       );
 
       if (response.ok) {

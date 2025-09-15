@@ -141,7 +141,7 @@ export default function Home() {
 
       try {
         const { data } = await axios.get(
-          `http://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${place}&days=3&aqi=no&alerts=no`,
+          `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${place}&days=3&aqi=no&alerts=no`,
         );
         console.log(
           `Fetched ${data?.forecast?.forecastday?.length || 0} days of forecast data`,

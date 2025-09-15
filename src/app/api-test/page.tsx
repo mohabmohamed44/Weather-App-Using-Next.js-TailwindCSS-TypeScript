@@ -45,7 +45,7 @@ export default function APITestPage() {
 
       // Make a request to test the API key with 7-day forecast
       const response = await axios.get(
-        `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${testLocation}&days=3&aqi=no&alerts=no`,
+        `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${testLocation}&days=3&aqi=no&alerts=no`,
       );
 
       setTestResult(response.data);

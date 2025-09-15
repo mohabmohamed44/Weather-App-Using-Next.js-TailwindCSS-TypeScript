@@ -31,7 +31,7 @@ export default function Navbar({ location }: Props) {
       setError("");
       try {
         const response = await axios.get(
-          `http://api.weatherapi.com/v1/search.json?key=${API_KEY}&q=${value}`,
+          `https://api.weatherapi.com/v1/search.json?key=${API_KEY}&q=${value}`,
         );
 
         if (response.data && response.data.length > 0) {
@@ -107,7 +107,7 @@ export default function Navbar({ location }: Props) {
           try {
             setLoadingCity(true);
             const response = await axios.get(
-              `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${latitude},${longitude}&aqi=no`,
+              `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${latitude},${longitude}&aqi=no`,
             );
             setTimeout(() => {
               setLoadingCity(false);
