@@ -8,8 +8,8 @@ export default function Container(props: React.HTMLProps<HTMLDivElement>) {
     <div
       {...props}
       className={cn(
-        "w-full bg-white border rounded-xl flex py-4 shadow-sm",
-        props.className
+        "w-full bg-white border rounded-xl flex py-4 shadow-sm mb-5",
+        props.className,
       )}
     />
   );

@@ -18,6 +18,20 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## API Configuration
+
+This weather app uses the [WeatherAPI.com](https://www.weatherapi.com/) service. To run the application, you need to:
+
+1. Sign up for a free account at [WeatherAPI.com](https://www.weatherapi.com/)
+2. Get your API key from the dashboard
+3. Create a `.env.local` file in the root directory with the following content:
+
+```
+NEXT_PUBLIC_WEATHER_API_KEY=your_api_key_here
+```
+
+Replace `your_api_key_here` with the actual API key you received from WeatherAPI.com.
+
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## Learn More
